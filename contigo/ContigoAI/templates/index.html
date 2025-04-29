@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contigo: Detección de cáncer de mama con IA</title>
+    <title>Contigo: Detección de cáncer de piel con IA</title>
     <link rel="stylesheet" href="static/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,12 +36,12 @@
         <div class="container">
           <div class="hero-content">
             <h2>
-              Detección preliminar de cáncer de mama con inteligencia artificial
+              Detección preliminar de cáncer de piel con inteligencia artificial
             </h2>
             <p>
               Contigo utiliza tecnología de inteligencia artificial avanzada
-              para proporcionar una evaluación preliminar de imágenes de
-              mamografías, ayudando en la detección temprana del cáncer de mama.
+              para proporcionar una evaluación preliminar de imágenes de la piel,
+              ayudando en la detección temprana del cáncer cutáneo.
             </p>
             <a href="#upload-section" class="btn-primary">Comenzar análisis</a>
           </div>
@@ -53,7 +53,7 @@
           <div class="upload-card">
             <h3>Sube tu imagen para análisis</h3>
             <p class="upload-info">
-              Selecciona una imagen de mamografía en formato JPG, JPEG o PNG. La
+              Selecciona una imagen de una lesión cutánea en formato JPG, JPEG o PNG. La
               imagen será analizada por nuestro modelo de IA para una evaluación
               preliminar.
             </p>
@@ -62,12 +62,12 @@
               <div class="file-upload">
                 <input
                   type="file"
-                  id="mammography-image"
-                  name="mammography-image"
+                  id="skin-image"
+                  name="skin-image"
                   accept="image/jpeg,image/jpg,image/png"
                   class="file-input"
                 />
-                <label for="mammography-image" class="file-label">
+                <label for="skin-image" class="file-label">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -113,7 +113,7 @@
                   <img
                     id="image-preview"
                     src=""
-                    alt="Vista previa de la mamografía"
+                    alt="Vista previa de la imagen de la piel"
                   />
                 </div>
                 <button type="submit" class="btn-primary btn-analyze">
@@ -160,7 +160,7 @@
                 <p>
                   Este resultado es solo una evaluación preliminar y no
                   sustituye el diagnóstico de un profesional médico. Por favor,
-                  consulte a un especialista para una evaluación completa.
+                  consulte a un dermatólogo para una evaluación completa.
                 </p>
               </div>
               <button id="new-analysis" class="btn-secondary">
@@ -194,7 +194,7 @@
               <h4>Evaluación rápida</h4>
               <p>
                 Obtén resultados en segundos, ayudando a identificar posibles
-                áreas de preocupación de manera eficiente.
+                lesiones cutáneas sospechosas de manera eficiente.
               </p>
             </div>
 
@@ -219,7 +219,7 @@
               <h4>Ayuda complementaria</h4>
               <p>
                 Diseñado para complementar, no reemplazar, el diagnóstico médico
-                profesional y las pruebas tradicionales.
+                profesional y la consulta dermatológica.
               </p>
             </div>
 
@@ -245,7 +245,7 @@
               <h4>Accesible para todos</h4>
               <p>
                 Una herramienta accesible para pacientes y profesionales médicos
-                que ayuda en la detección temprana.
+                que apoya en la detección temprana del cáncer de piel.
               </p>
             </div>
           </div>
@@ -258,21 +258,26 @@
             <div class="info-content">
               <h3>La importancia de la detección temprana</h3>
               <p>
-                El cáncer de mama es una de las principales causas de muerte por
-                cáncer en mujeres en todo el mundo. La detección temprana es
-                crucial para un tratamiento exitoso.
+                El cáncer de piel es uno de los tipos de cáncer más comunes en 
+                Perú, especialmente en zonas con alta exposición solar como la 
+                costa. En 2020, se registraron más de 1,000 nuevos casos, según
+                 datos del Ministerio de Salud.
               </p>
               <p>
-                Cuando se detecta en etapas iniciales, la tasa de supervivencia
-                a 5 años es de más del 90%. Las mamografías regulares son una
-                herramienta crucial en este proceso.
+                La detección temprana es fundamental: cuando se diagnostica en 
+                fases iniciales, el cáncer de piel puede tratarse con éxito en 
+                más del 90% de los casos. El uso de bloqueador solar, 
+                la autoevaluación periódica de manchas o lunares, y las visitas
+                regulares al dermatólogo son claves para una prevención efectiva.
+        </p>
+        <a href="about.html" class="btn-secondary">Conocer más</a>
               </p>
               <a href="about.html" class="btn-secondary">Conocer más</a>
             </div>
             <div class="info-image">
               <img
-                src="static/images/awareness.svg"
-                alt="Concientización sobre el cáncer de mama"
+                src="static/images/imgPiel.jpeg"
+                alt="Concientización sobre el cáncer de piel"
               />
             </div>
           </div>
@@ -292,7 +297,7 @@
             <div class="footer-column">
               <h4>Recursos</h4>
               <ul>
-                <li><a href="about.html">Sobre el cáncer de mama</a></li>
+                <li><a href="about.html">Sobre el cáncer de la piel</a></li>
                 <li><a href="#">Preguntas frecuentes</a></li>
                 <li><a href="#">Guía para especialistas</a></li>
               </ul>
