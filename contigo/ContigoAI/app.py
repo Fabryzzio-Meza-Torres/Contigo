@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 import os
 from PIL import Image
 from dotenv import load_dotenv
@@ -8,6 +9,7 @@ from api import analyze_image_via_api
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app) 
 
 # Configuración
 UPLOAD_FOLDER = "uploads"
@@ -38,10 +40,10 @@ def about():
 # Endpoint para procesar las imágenes
 @app.route("/analyze", methods=["POST"])
 def analyze_image():
-    if "file" not in request.files:
+    if "skin-image" not in request.files:
         return jsonify({"error": "No se ha seleccionado ningún archivo"}), 400
 
-    file = request.files["file"]
+    file = request.files["skin-image"]
 
     if file.filename == "":
         return jsonify({"error": "No se ha seleccionado ningún archivo"}), 400
@@ -67,8 +69,15 @@ def analyze_image():
         return jsonify(prediction)
 
     except Exception as e:
-        app.logger.error(f"Error general: {str(e)}")
-        return jsonify({"error": f"Error al procesar la imagen: {str(e)}"}), 500
+        app.logger.error(f"Error en /analyze: {str(e)}")  # Log detallado
+        # También imprime el error en consola
+        print("ERROR EN /analyze:", str(e))
+        return jsonify({
+            "error": "Error al procesar la imagen",
+            "details": str(e)  # Enviar detalles al frontend
+        }), 500
+
+
 
 
 if __name__ == "__main__":

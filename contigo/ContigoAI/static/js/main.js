@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Elementos del DOM
-  const fileInput = document.getElementById("mammography-image");
+  const fileInput = document.getElementById("skin-image");
   const previewContainer = document.getElementById("preview-container");
   const imagePreview = document.getElementById("image-preview");
   const removeButton = document.getElementById("remove-image");
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Crear FormData para enviar la imagen
     const formData = new FormData();
-    formData.append("file", fileInput.files[0]);
+    formData.append("skin-image", fileInput.files[0]);
 
     // Enviar imagen al servidor
     fetch("/analyze", {
@@ -95,6 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Procesar resultado
         displayResults(data);
       })
+
+      
       .catch((error) => {
         console.error("Error:", error);
         loader.classList.add("hidden");
