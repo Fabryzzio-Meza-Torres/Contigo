@@ -1,19 +1,19 @@
-/* Variables globales */
+/* Variables globales - Paleta de colores de la piel */
 :root {
-  --primary-color: #e86ea4;
-  --primary-light: #f8d6e2;
-  --primary-dark: #ca4e7e;
-  --secondary-color: #3c5a9a;
-  --secondary-light: #d6e2f8;
-  --text-color: #333;
-  --text-light: #666;
+  --primary-color: #e8927e; /* Tono piel melocotón */
+  --primary-light: #fbe0d2; /* Piel claro */
+  --primary-dark: #c76a5a; /* Piel oscuro/rubor */
+  --secondary-color: #8a6552; /* Marrón piel */
+  --secondary-light: #e9d7cd; /* Beige suave */
+  --text-color: #554640; /* Marrón oscuro */
+  --text-light: #7b6a64; /* Marrón grisáceo */
   --background-color: #fff;
-  --background-light: #f8f9fa;
-  --border-color: #ddd;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  --benign-color: #2aa876;
-  --malignant-color: #e74c3c;
-  --suspicious-color: #f39c12;
+  --background-light: #faf7f5; /* Tono hueso muy suave */
+  --border-color: #e4d5ca; /* Borde beige */
+  --shadow: 0 2px 10px rgba(138, 101, 82, 0.1);
+  --benign-color: #55af82; /* Verde más cálido */
+  --malignant-color: #dc5e53; /* Rojo más terracota */
+  --suspicious-color: #e09a53; /* Naranja cálido */
   --error-color: #95a5a6;
   --radius: 12px;
   --transition: all 0.3s ease;
@@ -365,17 +365,17 @@ body {
 }
 
 .results-content.benign .result-indicator {
-  background-color: rgba(42, 168, 118, 0.2);
+  background-color: rgba(85, 175, 130, 0.2);
   color: var(--benign-color);
 }
 
 .results-content.malignant .result-indicator {
-  background-color: rgba(231, 76, 60, 0.2);
+  background-color: rgba(220, 94, 83, 0.2);
   color: var(--malignant-color);
 }
 
 .results-content.suspicious .result-indicator {
-  background-color: rgba(243, 156, 18, 0.2);
+  background-color: rgba(224, 154, 83, 0.2);
   color: var(--suspicious-color);
 }
 
@@ -392,15 +392,24 @@ body {
   transition: var(--transition);
 }
 
-.results-content.benign h3 {
+.result-diagnosis {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.results-content.benign h3,
+.results-content.benign .result-diagnosis {
   color: var(--benign-color);
 }
 
-.results-content.malignant h3 {
+.results-content.malignant h3,
+.results-content.malignant .result-diagnosis {
   color: var(--malignant-color);
 }
 
-.results-content.suspicious h3 {
+.results-content.suspicious h3,
+.results-content.suspicious .result-diagnosis {
   color: var(--suspicious-color);
 }
 
@@ -466,7 +475,7 @@ body {
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(138, 101, 82, 0.1);
 }
 
 .feature-icon {
@@ -508,6 +517,109 @@ body {
   width: 100%;
   max-width: 450px;
   height: auto;
+  border-radius: var(--radius);
+}
+
+/* Estilos para la página About */
+.page-header {
+  background-color: var(--primary-light);
+  padding: 60px 0;
+  text-align: center;
+}
+
+.page-header h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 15px;
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.info-content-section {
+  padding: 60px 0;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.content-card {
+  background-color: var(--background-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px;
+}
+
+.content-card h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.4rem;
+  color: var(--primary-dark);
+  margin-bottom: 20px;
+}
+
+.content-card p {
+  margin-bottom: 15px;
+}
+
+.content-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.bullet-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.bullet-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.bullet-list li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+.cta-box {
+  background-color: var(--primary-light);
+  border-radius: var(--radius);
+  padding: 40px;
+  text-align: center;
+}
+
+.cta-box h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+  color: var(--primary-dark);
+  margin-bottom: 15px;
+}
+
+.cta-box p {
+  margin-bottom: 25px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Footer */
@@ -613,6 +725,14 @@ body {
     order: -1;
     display: flex;
     justify-content: center;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .two-columns {
+    grid-template-columns: 1fr;
   }
 
   .footer-content {

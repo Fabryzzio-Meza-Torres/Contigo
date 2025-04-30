@@ -1,95 +1,64 @@
-import base64
 import requests
-from PIL import Image
-from io import BytesIO
 import os
-from dotenv import load_dotenv
-
-# Cargar variables de entorno
-load_dotenv()
-
-# Clave de API de Hugging Face
-#HUGGINGFACE_API_KEY = "hf_abcd1234exampletoken5678"
-
-HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
-
-# URL del modelo en Hugging Face
-API_URL = "https://api-inference.huggingface.co/models/Anwarkh1/Skin_Cancer-Image_Classification"
-
-# Verificación de la clave
-if not HUGGINGFACE_API_KEY:
-    raise ValueError("Falta la variable de entorno HUGGINGFACE_API_KEY")
-
-HEADERS = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
+import io
+import base64
+from PIL import Image
 
 
-def preprocess_image(image: Image.Image) -> str:
-    """Convierte la imagen a base64 para enviar a la API."""
-    max_size = (1024, 1024)
-    image.thumbnail(max_size)
-    buffered = BytesIO()
-    image.save(buffered, format="JPEG")
-    return base64.b64encode(buffered.getvalue()).decode("utf-8")
+def analyze_image_via_api(image):
+    """
+    Envía una imagen a la API de Hugging Face para análisis de lesiones cutáneas
+    y retorna los resultados del modelo de IA.
 
+    Args:
+        image: Objeto de imagen PIL
 
-def analyze_image_via_api(image: Image.Image) -> dict:
-    """Envía la imagen a la API de Hugging Face y devuelve el resultado procesado."""
-    from io import BytesIO
-    buffered = BytesIO()
-    image.save(buffered, format="JPEG")
-    img_bytes = buffered.getvalue()
+    Returns:
+        dict: Resultado de la predicción con etiqueta y confianza
+    """
+    try:
+        # Convertir imagen a formato base64
+        img_format = (image.format or "").lower()
+        if img_format not in {"jpeg", "jpg", "png"}:
+            return {"error": f"Formato no permitido: {img_format}. Usa jpeg, jpg, png."}
 
-    response = requests.post(
-        API_URL,
-        headers={
-            "Authorization": f"Bearer {HUGGINGFACE_API_KEY}",
-            "Content-Type": "application/octet-stream"  # Formato correcto
-        },
-        data=img_bytes  # Enviar bytes directamente
-    )
+        # Convertir a RGB siempre antes de guardar como JPEG
+        if image.mode != "RGB":
+            image = image.convert("RGB")
 
-    if response.status_code != 200:
-        return {"error": f"API error: {response.status_code} - {response.text}"}
-    result = response.json()
-    return interpret_result(result)
+        buffered = io.BytesIO()
+        image.save(buffered, format="JPEG")
+        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
-"""    img_str = preprocess_image(image)
-    payload = {"inputs": {"image": img_str}}
+        # Obtener token de Hugging Face desde variables de entorno
+        api_token = os.environ.get("HUGGING_FACE_TOKEN")
+        if not api_token:
+            return {"error": "No se ha configurado el token de API de Hugging Face"}
 
-    response = requests.post(API_URL, headers=HEADERS, json=payload)
+        # URL del modelo en Hugging Face para detección de cáncer de piel
+        # Este es un ejemplo, deberías usar un modelo entrenado específicamente para lesiones cutáneas
+        api_url = "https://api-inference.huggingface.co/models/Anwarkh1/Skin_Cancer-Image_Classification"
 
-    if response.status_code != 200:
-        raise RuntimeError(f"API error: {response.status_code} - {response.text}")
+        # Enviar solicitud a la API
+        headers = {"Authorization": f"Bearer {api_token}"}
+        response = requests.post(api_url, headers=headers, json={"image": img_str})
 
-    result = response.json()
+        # Verificar respuesta
+        if response.status_code != 200:
+            return {"error": f"Error en la API: {response.text}"}
 
-    return interpret_result(result)"""
+        # Procesar resultado
+        results = response.json()
 
+        # Si hay múltiples clasificaciones, tomar la de mayor confianza
+        if isinstance(results, list) and len(results) > 0:
+            top_prediction = results[0]
+            label = top_prediction.get("label", "Indeterminado")
+            confidence = top_prediction.get("score", 0.0)
 
-def interpret_result(result) -> dict:
-    """Procesa el resultado de la API para extraer la etiqueta y confianza."""
-    if isinstance(result, list) and len(result) > 0 and isinstance(result[0], dict):
-        label = result[0].get("label", "unknown")
-        confidence = result[0].get("score", 0.5)
-    elif isinstance(result, dict):
-        try:
-            label, confidence = max(result.items(), key=lambda x: x[1])
-        except:
-            label, confidence = "unknown", 0.5
-    else:
-        label, confidence = "unknown", 0.5
+            return {"label": label, "confidence": confidence}
+        else:
+            return {"error": "No se obtuvieron resultados válidos de la API"}
 
-    # Normalización de etiquetas
-    label = label.lower()
-    if "malig" in label or "cancer" in label:
-        label = "malignant"
-    elif "benig" in label or "normal" in label:
-        label = "benign"
-
-    # Normalización de confianza
-    if not isinstance(confidence, (int, float)):
-        confidence = 0.5
-    elif confidence > 1:
-        confidence /= 100
-
-    return {"label": label, "confidence": confidence}
+    except Exception as e:
+        return {"error": f"Error al comunicarse con la API: {str(e)}"}

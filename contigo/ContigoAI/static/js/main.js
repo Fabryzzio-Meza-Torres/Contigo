@@ -10,8 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultsContent = document.querySelector(".results-content");
   const resultPercentage = document.getElementById("result-percentage");
   const resultLabel = document.getElementById("result-label");
+  const resultDiagnosis = document.getElementById("result-diagnosis");
   const resultDescription = document.getElementById("result-description");
   const newAnalysisButton = document.getElementById("new-analysis");
+
+  // Umbral de confianza para considerar un diagnóstico como válido
+  const CONFIDENCE_THRESHOLD = 0.6; // 60%
 
   // Manejar cambio en el input de archivo
   fileInput.addEventListener("change", function (e) {
@@ -95,8 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // Procesar resultado
         displayResults(data);
       })
-
-      
       .catch((error) => {
         console.error("Error:", error);
         loader.classList.add("hidden");
@@ -108,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
           error.message ||
           "Ha ocurrido un error al procesar la imagen. Por favor intenta nuevamente.";
         resultPercentage.textContent = "!";
+        resultDiagnosis.textContent = "";
 
         // Resetear clases de estilo
         resultsContent.className = "results-content";
@@ -139,10 +142,49 @@ document.addEventListener("DOMContentLoaded", function () {
       resultDescription.textContent = data.error;
       resultsContent.classList.add("error");
       resultPercentage.textContent = "!";
+      resultDiagnosis.textContent = "";
       return;
     }
 
-    // Obtener detalles del resultado
+    // Si recibimos el mensaje de clasificación directamente del backend
+    if (data.classification && data.display_message) {
+      // Establecer el porcentaje
+      const confidence = data.confidence !== undefined ? data.confidence : 0.5;
+      const confidencePercent = Math.round(confidence * 100);
+      resultPercentage.textContent = confidencePercent + "%";
+
+      // Establecer la etiqueta y el diagnóstico
+      resultLabel.textContent = data.display_message.split(":")[0].trim();
+
+      // Establecer la clase CSS correspondiente
+      let className = data.classification; // benign, malignant, suspicious
+      resultsContent.classList.add(className);
+
+      // Para diagnósticos malignos, mostrar el pre-diagnóstico
+      if (data.classification === "malignant" && data.pre_diagnosis) {
+        resultDiagnosis.textContent = "Pre-diagnóstico: " + data.pre_diagnosis;
+      } else if (data.classification === "benign") {
+        resultDiagnosis.textContent = "No Cáncer en la piel";
+      } else {
+        resultDiagnosis.textContent = "";
+      }
+
+      // Crear descripción según el tipo de resultado
+      let description = "";
+      if (className === "benign") {
+        description = `La imagen analizada muestra características que suelen asociarse con lesiones cutáneas benignas. El modelo de IA tiene una confianza del ${confidencePercent}% en esta clasificación.`;
+      } else if (className === "malignant") {
+        description = `La imagen analizada muestra características que podrían asociarse con lesiones cutáneas malignas. El modelo de IA tiene una confianza del ${confidencePercent}% en esta clasificación.`;
+      } else {
+        description = `El resultado del análisis no es concluyente. El modelo de IA ha clasificado la imagen con una confianza del ${confidencePercent}%, lo cual no es suficiente para dar un diagnóstico preliminar certero.`;
+      }
+
+      resultDescription.textContent = description;
+      return;
+    }
+
+    // Procesamiento clásico si no recibimos la clasificación directa del backend
+    // (mantenemos esta lógica como respaldo)
     let label = data.label || "unknown";
     let confidence = data.confidence !== undefined ? data.confidence : 0.5;
 
@@ -157,32 +199,68 @@ document.addEventListener("DOMContentLoaded", function () {
     const confidencePercent = Math.round(confidence * 100);
     resultPercentage.textContent = confidencePercent + "%";
 
-    // Determinar clasificación y descripción
+    // Lista de tipos benignos y malignos
+    const benignTypes = [
+      "benign keratosis-like lesions",
+      "actinic keratoses",
+      "vascular lesions",
+      "melanocytic nevi",
+      "dermatofibroma",
+    ];
+
+    const malignantTypes = ["basal cell carcinoma", "melanoma"];
+
+    // Convertir la etiqueta a minúsculas para comparación
     const labelLower = label.toLowerCase();
+
+    // Determinar si es benigno o maligno
+    let isBenign = benignTypes.some((type) =>
+      labelLower.includes(type.toLowerCase())
+    );
+    let isMalignant = malignantTypes.some((type) =>
+      labelLower.includes(type.toLowerCase())
+    );
+
+    // Si no coincide específicamente con nuestras listas, usamos heurísticas generales
+    if (!isBenign && !isMalignant) {
+      isBenign =
+        labelLower === "benign" ||
+        labelLower.includes("benign") ||
+        labelLower === "normal" ||
+        labelLower.includes("negative");
+
+      isMalignant =
+        labelLower === "malignant" ||
+        labelLower.includes("malignant") ||
+        labelLower.includes("cancer") ||
+        labelLower.includes("positive");
+    }
+
+    // Determinar clasificación y descripción
     let className, description;
 
-    if (
-      labelLower === "benign" ||
-      labelLower.includes("benign") ||
-      labelLower === "normal" ||
-      labelLower.includes("negative")
-    ) {
+    // Aplicar umbral de confianza - si la confianza es menor que el umbral y es maligno,
+    // lo consideramos indeterminado
+    if (isMalignant && confidence < CONFIDENCE_THRESHOLD) {
+      isMalignant = false;
+      isBenign = true; // Lo tratamos como indeterminado
+    }
+
+    if (isBenign) {
       className = "benign";
-      resultLabel.textContent = "Posiblemente benigno";
-      description = `La imagen analizada muestra características que suelen asociarse con tejido normal o benigno. El modelo de IA tiene una confianza del ${confidencePercent}% en esta clasificación.`;
-    } else if (
-      labelLower === "malignant" ||
-      labelLower.includes("malignant") ||
-      labelLower.includes("cancer") ||
-      labelLower.includes("positive")
-    ) {
+      resultLabel.textContent = "Benigno (No Cáncer en la piel)";
+      resultDiagnosis.textContent = "";
+      description = `La imagen analizada muestra características que suelen asociarse con lesiones cutáneas benignas. El modelo de IA tiene una confianza del ${confidencePercent}% en esta clasificación.`;
+    } else if (isMalignant) {
       className = "malignant";
-      resultLabel.textContent = "Posiblemente maligno";
-      description = `La imagen analizada muestra características que podrían asociarse con tejido anormal o maligno. El modelo de IA tiene una confianza del ${confidencePercent}% en esta clasificación.`;
+      resultLabel.textContent = "Maligno";
+      resultDiagnosis.textContent = `Pre-diagnóstico: ${label}: ${confidencePercent}%`;
+      description = `La imagen analizada muestra características que podrían asociarse con lesiones cutáneas malignas. El modelo de IA tiene una confianza del ${confidencePercent}% en esta clasificación.`;
     } else {
-      className = "suspicious";
-      resultLabel.textContent = "Indeterminado";
-      description = `El resultado del análisis no es concluyente. El modelo de IA ha clasificado la imagen como "${label}" con una confianza del ${confidencePercent}%.`;
+      className = "benign";
+      resultLabel.textContent = "Benigno (No Cáncer en la piel)";
+      resultDiagnosis.textContent = "";
+      description = `La imagen analizada muestra características que suelen asociarse con lesiones cutáneas benignas. El modelo de IA tiene una confianza del ${confidencePercent}% en esta clasificación.`;
     }
 
     // Actualizar interfaz

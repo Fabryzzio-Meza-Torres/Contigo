@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Información - Contigo: Detección de cáncer de la piel con IA</title>
-    <link rel="stylesheet" href="static/css/style.css" />
+    <title>Información | Contigo IA: Detección de cáncer de piel con IA</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,13 +20,13 @@
       <div class="container">
         <div class="header-content">
           <div class="logo">
-            <h1>Contigo</h1>
+            <h1>Contigo IA</h1>
             <p class="tagline">Detección asistida por IA</p>
           </div>
           <nav class="main-nav">
             <ul>
-              <li><a href="index.html">Inicio</a></li>
-              <li><a href="#" class="active">Información</a></li>
+              <li><a href="/">Inicio</a></li>
+              <li><a href="/about" class="active">Información</a></li>
               <li><a href="#" class="btn-secondary">Contacto</a></li>
             </ul>
           </nav>
@@ -36,265 +39,229 @@
         <div class="container">
           <h2>Información sobre el cáncer de piel</h2>
           <p>
-            Conozca más sobre la importancia de la detección
-            - temprana y cómo nuestra tecnología puede ayudar a prevenir complicaciones
-          </p>
-          
+            Conoce más sobre esta enfermedad y la importancia de la detección
+            temprana
           </p>
         </div>
       </section>
 
-      <section class="about-section">
+      <section class="info-content-section">
         <div class="container">
-          <div class="about-grid">
-            <div class="about-content">
+          <div class="content-grid">
+            <div class="content-card">
               <h3>¿Qué es el cáncer de piel?</h3>
               <p>
-                El cáncer de piel es el crecimiento anormal de células 
-                cutáneas, generalmente como resultado de una exposición 
-                excesiva al sol. Puede aparecer en cualquier parte del 
-                cuerpo, pero es más común en áreas que están expuestas 
-                frecuentemente a la radiación ultravioleta (UV).
+                El cáncer de piel es el crecimiento descontrolado de células
+                anormales en la piel. Ocurre cuando el daño al ADN de las
+                células de la piel (a menudo causado por la radiación
+                ultravioleta del sol o de camas de bronceado) desencadena
+                mutaciones que llevan a que las células de la piel se
+                multipliquen rápidamente y formen tumores malignos.
               </p>
-
               <p>
-                Existen varios tipos de cáncer de piel, siendo los más 
-                comunes el carcinoma basocelular, el carcinoma espinocelular 
-                y el melanoma. El melanoma es el más peligroso, pero también 
-                altamente tratable si se detecta a tiempo.
+                Hay varios tipos de cáncer de piel, siendo los más comunes el
+                carcinoma basocelular, el carcinoma de células escamosas y el
+                melanoma, este último siendo el más peligroso.
               </p>
+            </div>
 
+            <div class="content-card">
+              <h3>Factores de riesgo</h3>
+              <ul class="bullet-list">
+                <li>
+                  <strong>Exposición a rayos UV:</strong> La exposición al sol y
+                  a camas de bronceado es el principal factor de riesgo.
+                </li>
+                <li>
+                  <strong>Tipo de piel:</strong> Personas de piel clara, que se
+                  queman con facilidad o tienen pecas, tienen mayor riesgo.
+                </li>
+                <li>
+                  <strong>Historial personal o familiar:</strong> Antecedentes
+                  personales o familiares de cáncer de piel.
+                </li>
+                <li>
+                  <strong>Edad:</strong> El riesgo aumenta con la edad por la
+                  acumulación de exposición al sol.
+                </li>
+                <li>
+                  <strong>Sistema inmunológico debilitado:</strong> Personas con
+                  sistemas inmunológicos comprometidos tienen mayor riesgo.
+                </li>
+                <li>
+                  <strong>Exposición a radiación o sustancias químicas:</strong>
+                  Exposición a arsénico o a radiación.
+                </li>
+              </ul>
+            </div>
+
+            <div class="content-card">
+              <h3>Tipos de cáncer de piel</h3>
+              <p>Los tipos principales de cáncer de piel incluyen:</p>
+              <ul class="bullet-list">
+                <li>
+                  <strong>Carcinoma basocelular:</strong> El tipo más común,
+                  raramente metastatiza pero puede ser localmente destructivo.
+                </li>
+                <li>
+                  <strong>Carcinoma de células escamosas:</strong> El segundo
+                  tipo más común, puede propagarse a otras partes del cuerpo.
+                </li>
+                <li>
+                  <strong>Melanoma:</strong> Menos común pero mucho más
+                  peligroso, puede propagarse rápidamente si no se trata a
+                  tiempo.
+                </li>
+                <li>
+                  <strong>Carcinoma de células de Merkel:</strong> Raro pero
+                  agresivo, tiende a crecer rápidamente y propagarse.
+                </li>
+                <li>
+                  <strong>Linfoma cutáneo:</strong> Cáncer que comienza en los
+                  linfocitos de la piel.
+                </li>
+                <li>
+                  <strong>Sarcoma de Kaposi:</strong> Cáncer que se desarrolla
+                  en los revestimientos de los vasos sanguíneos y linfáticos.
+                </li>
+              </ul>
+            </div>
+
+            <div class="content-card full-width">
+              <h3>El ABCDE del melanoma</h3>
+              <div class="two-columns">
+                <div>
+                  <p>
+                    El método ABCDE es una herramienta útil para identificar
+                    posibles melanomas en etapas tempranas. Cada letra
+                    representa una característica que debe evaluarse en lunares
+                    o manchas sospechosas:
+                  </p>
+                  <ul class="bullet-list">
+                    <li>
+                      <strong>A - Asimetría:</strong> Una mitad del lunar no
+                      coincide con la otra.
+                    </li>
+                    <li>
+                      <strong>B - Borde:</strong> Los bordes son irregulares,
+                      dentados o mal definidos.
+                    </li>
+                    <li>
+                      <strong>C - Color:</strong> El color no es uniforme y
+                      puede incluir diferentes tonos de marrón, negro, o a veces
+                      rojo, blanco o azul.
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <ul class="bullet-list">
+                    <li>
+                      <strong>D - Diámetro:</strong> Mayor a 6 milímetros
+                      (aproximadamente el tamaño de un borrador de lápiz),
+                      aunque los melanomas pueden ser más pequeños.
+                    </li>
+                    <li>
+                      <strong>E - Evolución:</strong> El lunar cambia de tamaño,
+                      forma, color o comienza a sangrar, picar o formar costras.
+                    </li>
+                  </ul>
+                  <p>
+                    Si notas alguna de estas características en un lunar o
+                    mancha, es importante consultar a un dermatólogo lo antes
+                    posible. La detección temprana es clave para un tratamiento
+                    exitoso.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="content-card">
+              <h3>Signos de advertencia</h3>
+              <p>
+                Además del ABCDE del melanoma, algunos signos de alerta que
+                podrían indicar cáncer de piel incluyen:
+              </p>
+              <ul class="bullet-list">
+                <li>Una herida que no cicatriza</li>
+                <li>
+                  Una zona brillante, perlada, de color carne o rosa rojizo
+                </li>
+                <li>
+                  Una zona plana, áspera, escamosa o de color rojizo o marrón
+                </li>
+                <li>Una zona que sangra o forma costras fácilmente</li>
+                <li>Un lunar que cambia de textura o se vuelve doloroso</li>
+                <li>Una región de la piel que se siente diferente al tacto</li>
+                <li>
+                  Cualquier nuevo crecimiento, especialmente si crece
+                  rápidamente
+                </li>
+              </ul>
+            </div>
+
+            <div class="content-card">
               <h3>La importancia de la detección temprana</h3>
+              <p>La detección temprana del cáncer de piel es crucial porque:</p>
+              <ul class="bullet-list">
+                <li>
+                  En etapas iniciales es altamente tratable, con tasas de
+                  curación de hasta el 98%.
+                </li>
+                <li>
+                  Permite opciones de tratamiento menos invasivas y mejores
+                  resultados estéticos.
+                </li>
+                <li>
+                  Reduce significativamente el riesgo de que el cáncer se
+                  propague a otras partes del cuerpo.
+                </li>
+                <li>
+                  Disminuye los costos asociados con tratamientos más complejos.
+                </li>
+                <li>
+                  Proporciona mayor tranquilidad y mejor calidad de vida para
+                  los pacientes.
+                </li>
+              </ul>
               <p>
-                Detectar el cáncer de piel en sus etapas iniciales mejora 
-                considerablemente las probabilidades de un tratamiento exitoso.
-                Cuando se identifica a tiempo, muchos tipos de cáncer de piel 
-                tienen tasas de curación superiores al 95%.
-              </p>
-
-              <p>
-                La autoexploración regular de la piel y el uso de herramientas 
-                de diagnóstico asistido por inteligencia artificial permiten
-                detectar lesiones sospechosas antes de que se vuelvan peligrosas.
-                Consultar a un dermatólogo ante cualquier cambio en lunares o 
-                manchas es clave para una intervención temprana.
-              </p>
-
-              <div class="info-box">
-                <h4>Señales de advertencia</h4>
-                <ul>
-                  <li>Aparición de una nueva mancha o lunar sospechoso</li>
-                  <li>
-                    Cambio en un lunar existente (forma, tamaño, color)
-                  </li>
-                  <li>Llaga que no cicatriza</li>
-                  <li>
-                    Picazón, sangrado o dolor en una zona de la piel
-                  </li>
-                  <li>Borde irregular o asimetría en lunares</li>
-                  <li>Colores variados en una sola lesión</li>
-                </ul>
-              </div>
-            </div>
-
-            <aside class="about-sidebar">
-              <div class="sidebar-card">
-                <h4>Factores de riesgo</h4>
-                <ul>
-                  <li>Exposición excesiva al sol o camas solares</li>
-                  <li>Piel clara o quemaduras solares frecuentes</li>
-                  <li>Antecedentes familiares de cáncer de piel</li>
-                  <li>Sistema inmunológico debilitado</li>
-                  <li>Presencia de muchos lunares o lunares atípicos</li>
-                  <li>Edad avanzada</li>
-                </ul>
-              </div>
-
-              <div class="sidebar-card statistics">
-                <h4>Estadísticas importantes</h4>
-                <div class="stat-item">
-                  <span class="stat-number">1 de 5</span>
-                  <p>Personas desarrollarán cáncer de piel antes de los 70 años</p>
-                </div>
-                <div class="stat-item">
-                  <span class="stat-number">99%</span>
-                  <p>
-                    Tasa de supervivencia si se detecta el melanoma en etapa temprana
-                  </p>
-                </div>
-                <div class="stat-item">
-                  <span class="stat-number">~90%</span>
-                  <p>
-                    De los melanomas están relacionados con la exposición UV
-                  </p>
-                </div>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <section class="technology-section">
-        <div class="container">
-          <h3>Nuestra tecnología</h3>
-          <div class="technology-grid">
-            <div class="technology-card">
-              <div class="card-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-                  ></path>
-                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                </svg>
-              </div>
-              <h4>Modelo de IA avanzado</h4>
-              <p>
-                Utilizamos un modelo de inteligencia artificial entrenado con
-                miles de imágenes de mamografías para detectar patrones y
-                anomalías asociadas con el cáncer de mama.
+                Se recomienda realizar autoexámenes mensuales y consultas
+                dermatológicas anuales, especialmente para personas con factores
+                de riesgo.
               </p>
             </div>
 
-            <div class="technology-card">
-              <div class="card-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-              </div>
-              <h4>Análisis en tiempo real</h4>
+            <div class="content-card">
+              <h3>Nuestra tecnología</h3>
               <p>
-                Nuestra aplicación procesa las imágenes en cuestión de segundos,
-                proporcionando resultados rápidos que pueden ayudar a médicos y
-                pacientes a tomar decisiones informadas más rápidamente.
+                Contigo IA utiliza algoritmos avanzados de aprendizaje profundo
+                entrenados con miles de imágenes de lesiones cutáneas para
+                detectar patrones que podrían indicar la presencia de cáncer de
+                piel. Nuestra tecnología analiza características como:
               </p>
-            </div>
-
-            <div class="technology-card">
-              <div class="card-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-              </div>
-              <h4>Alta precisión</h4>
+              <ul class="bullet-list">
+                <li>Patrones de color y textura</li>
+                <li>Forma y bordes de la lesión</li>
+                <li>Simetría y homogeneidad</li>
+                <li>
+                  Características específicas asociadas con diferentes tipos de
+                  cáncer de piel
+                </li>
+              </ul>
               <p>
-                El modelo ha demostrado una alta tasa de precisión en la
-                identificación de anomalías en las mamografías, lo que ayuda a
-                reducir tanto los falsos positivos como los falsos negativos.
-              </p>
-            </div>
-
-            <div class="technology-card">
-              <div class="card-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                  <line x1="3" y1="9" x2="21" y2="9"></line>
-                  <line x1="9" y1="21" x2="9" y2="9"></line>
-                </svg>
-              </div>
-              <h4>Aprendizaje continuo</h4>
-              <p>
-                Nuestro sistema está diseñado para mejorar continuamente a
-                medida que analiza más imágenes, lo que significa que su
-                precisión aumenta con el tiempo.
+                Es importante destacar que Contigo IA no reemplaza la evaluación
+                médica profesional, sino que sirve como una herramienta
+                complementaria en el proceso diagnóstico.
               </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section class="disclaimer-section">
-        <div class="container">
-          <div class="disclaimer-card">
-            <h3>Importante: Limitaciones de la herramienta</h3>
+          <div class="cta-box">
+            <h3>¿Listo para utilizar nuestra herramienta?</h3>
             <p>
-              La aplicación Contigo está diseñada como una herramienta de apoyo
-              preliminar y no como un sustituto de la evaluación médica
-              profesional. Existen limitaciones importantes que debe tener en
-              cuenta:
+              Prueba Contigo IA ahora y obtén una evaluación preliminar de tu
+              lesión cutánea en segundos.
             </p>
-
-            <ul>
-              <li>
-                Los resultados son orientativos y siempre deben ser confirmados
-                por un especialista en salud.
-              </li>
-              <li>
-                La precisión del análisis puede variar según la calidad de la
-                imagen subida.
-              </li>
-              <li>
-                La tecnología de IA sigue evolucionando y no es infalible.
-              </li>
-              <li>
-                Un resultado negativo no garantiza la ausencia de cáncer, y un
-                resultado positivo no confirma su presencia.
-              </li>
-            </ul>
-
-            <p>
-              Recomendamos enfáticamente realizar revisiones médicas regulares y
-              seguir los programas de detección recomendados por los
-              profesionales de la salud.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="cta-section">
-        <div class="container">
-          <div class="cta-content">
-            <h3>Comience a utilizar Contigo hoy</h3>
-            <p>
-              Nuestra herramienta está diseñada para complementar los métodos
-              tradicionales de detección y proporcionar una capa adicional de
-              información.
-            </p>
-            <a href="index.html#upload-section" class="btn-primary"
-              >Probar ahora</a
-            >
+            <a href="/" class="btn-primary">Comenzar análisis</a>
           </div>
         </div>
       </section>
@@ -304,7 +271,7 @@
       <div class="container">
         <div class="footer-content">
           <div class="footer-logo">
-            <h2>Contigo</h2>
+            <h2>Contigo IA</h2>
             <p>Tecnología al servicio de la salud</p>
           </div>
 
@@ -312,7 +279,7 @@
             <div class="footer-column">
               <h4>Recursos</h4>
               <ul>
-                <li><a href="#">Sobre el cáncer de mama</a></li>
+                <li><a href="/about">Sobre el cáncer de piel</a></li>
                 <li><a href="#">Preguntas frecuentes</a></li>
                 <li><a href="#">Guía para especialistas</a></li>
               </ul>
@@ -330,7 +297,9 @@
             <div class="footer-column">
               <h4>Contacto</h4>
               <ul>
-                <li><a href="mailto:info@contigo.org">info@contigo.org</a></li>
+                <li>
+                  <a href="mailto:info@contigoia.org">info@contigoia.org</a>
+                </li>
                 <li><a href="tel:+123456789">+12 345 6789</a></li>
               </ul>
             </div>
@@ -338,11 +307,285 @@
         </div>
 
         <div class="footer-bottom">
-          <p>&copy; 2025 Contigo - Todos los derechos reservados</p>
+          <p>&copy; 2025 Contigo IA - Todos los derechos reservados</p>
         </div>
       </div>
     </footer>
 
-    <script src="static/js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Información | Contigo IA: Detección de cáncer de mama con IA</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <h1>Contigo IA</h1>
+            <p class="tagline">Detección asistida por IA</p>
+          </div>
+          <nav class="main-nav">
+            <ul>
+              <li><a href="/">Inicio</a></li>
+              <li><a href="/about" class="active">Información</a></li>
+              <li><a href="#" class="btn-secondary">Contacto</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-header">
+        <div class="container">
+          <h2>Información sobre el cáncer de mama</h2>
+          <p>
+            Conoce más sobre esta enfermedad y la importancia de la detección
+            temprana
+          </p>
+        </div>
+      </section>
+
+      <section class="info-content-section">
+        <div class="container">
+          <div class="content-grid">
+            <div class="content-card">
+              <h3>¿Qué es el cáncer de mama?</h3>
+              <p>
+                El cáncer de mama es un tipo de cáncer que se origina cuando las
+                células de la mama comienzan a crecer de forma descontrolada.
+                Estas células normalmente forman un tumor que a menudo se puede
+                observar en una radiografía o se puede palpar como una
+                protuberancia.
+              </p>
+              <p>
+                El tumor es maligno (canceroso) si las células pueden crecer
+                invadiendo los tejidos circundantes o propagándose (metástasis)
+                a áreas distantes del cuerpo. El cáncer de mama se produce casi
+                exclusivamente en las mujeres, pero los hombres también pueden
+                desarrollarlo.
+              </p>
+            </div>
+
+            <div class="content-card">
+              <h3>Factores de riesgo</h3>
+              <ul class="bullet-list">
+                <li><strong>Edad:</strong> El riesgo aumenta con la edad.</li>
+                <li>
+                  <strong>Genética:</strong> Antecedentes familiares y
+                  mutaciones genéticas (BRCA1, BRCA2).
+                </li>
+                <li>
+                  <strong>Historial reproductivo:</strong> Menarquia temprana,
+                  menopausia tardía, primer embarazo después de los 30 años.
+                </li>
+                <li>
+                  <strong>Densidad mamaria:</strong> Las mamas densas pueden
+                  aumentar el riesgo.
+                </li>
+                <li>
+                  <strong>Exposición a estrógenos:</strong> Terapia hormonal
+                  prolongada.
+                </li>
+                <li>
+                  <strong>Estilo de vida:</strong> Consumo de alcohol, obesidad,
+                  sedentarismo.
+                </li>
+              </ul>
+            </div>
+
+            <div class="content-card">
+              <h3>Señales de alerta</h3>
+              <p>
+                Es importante consultar a un médico si notas alguno de estos
+                cambios:
+              </p>
+              <ul class="bullet-list">
+                <li>Un bulto nuevo en la mama o la axila</li>
+                <li>Engrosamiento o hinchazón de parte de la mama</li>
+                <li>Irritación o hundimientos en la piel de la mama</li>
+                <li>Enrojecimiento o descamación en el pezón o la mama</li>
+                <li>Hundimiento del pezón o dolor en esa zona</li>
+                <li>Secreción del pezón, que no sea leche materna</li>
+                <li>Cualquier cambio en el tamaño o la forma de la mama</li>
+                <li>Dolor en cualquier parte de la mama</li>
+              </ul>
+            </div>
+
+            <div class="content-card full-width">
+              <h3>La importancia de la detección temprana</h3>
+              <div class="two-columns">
+                <div>
+                  <p>
+                    La detección temprana del cáncer de mama es fundamental para
+                    mejorar los resultados del tratamiento y aumentar las tasas
+                    de supervivencia. Cuando el cáncer se detecta en una etapa
+                    temprana, antes de que se haya propagado, las opciones de
+                    tratamiento son más amplias y generalmente menos agresivas.
+                  </p>
+                  <p>
+                    Las tasas de supervivencia a 5 años para el cáncer de mama
+                    en etapa 0 o etapa I son cercanas al 100%, mientras que para
+                    el cáncer en etapa IV, que ya se ha propagado a otras partes
+                    del cuerpo, la tasa de supervivencia a 5 años es de
+                    aproximadamente 28%.
+                  </p>
+                </div>
+                <div>
+                  <p>Los métodos de detección temprana incluyen:</p>
+                  <ul class="bullet-list">
+                    <li>
+                      <strong>Autoexploración mamaria:</strong> Se recomienda
+                      realizarla mensualmente.
+                    </li>
+                    <li>
+                      <strong>Examen clínico:</strong> Realizado por un
+                      profesional de la salud.
+                    </li>
+                    <li>
+                      <strong>Mamografía:</strong> El método más efectivo para
+                      detectar el cáncer de mama en etapas tempranas, incluso
+                      antes de que aparezcan síntomas.
+                    </li>
+                    <li>
+                      <strong>Otras pruebas de imagen:</strong> Como ultrasonido
+                      o resonancia magnética, especialmente para mujeres con
+                      alto riesgo.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="content-card">
+              <h3>¿Cómo funciona una mamografía?</h3>
+              <p>
+                Una mamografía es una radiografía de baja dosis de los senos que
+                se utiliza para detectar cambios en el tejido mamario. Durante
+                el procedimiento, el seno se comprime brevemente entre dos
+                placas para aplanar y estirar el tejido. Esto puede ser
+                incómodo, pero es necesario para obtener una imagen clara.
+              </p>
+              <p>
+                La tecnología actual incluye mamografía digital, que almacena
+                las imágenes en un ordenador, y tomosíntesis (mamografía 3D),
+                que toma múltiples imágenes desde diferentes ángulos para crear
+                una imagen tridimensional.
+              </p>
+            </div>
+
+            <div class="content-card">
+              <h3>Interpretación de mamografías</h3>
+              <p>
+                Los radiólogos buscan varios signos que podrían indicar cáncer,
+                como:
+              </p>
+              <ul class="bullet-list">
+                <li>Masas o nódulos</li>
+                <li>Microcalcificaciones (pequeños depósitos de calcio)</li>
+                <li>
+                  Distorsión arquitectónica (el tejido parece distorsionado)
+                </li>
+                <li>Asimetrías (diferencias entre los senos)</li>
+              </ul>
+              <p>
+                La inteligencia artificial, como la utilizada en Contigo IA,
+                puede ayudar a analizar estas imágenes y destacar áreas de
+                preocupación para una revisión más detallada por parte de los
+                profesionales médicos.
+              </p>
+            </div>
+
+            <div class="content-card">
+              <h3>Nuestra tecnología</h3>
+              <p>
+                Contigo IA utiliza algoritmos avanzados de aprendizaje profundo
+                entrenados con miles de mamografías para detectar patrones que
+                podrían indicar la presencia de cáncer de mama. Nuestra
+                tecnología actúa como una segunda opinión, ayudando a los
+                profesionales médicos a tomar decisiones más informadas.
+              </p>
+              <p>
+                Es importante destacar que Contigo IA no reemplaza la evaluación
+                médica profesional, sino que sirve como una herramienta
+                complementaria en el proceso diagnóstico.
+              </p>
+            </div>
+          </div>
+
+          <div class="cta-box">
+            <h3>¿Listo para utilizar nuestra herramienta?</h3>
+            <p>
+              Prueba Contigo IA ahora y obtén una evaluación preliminar de tu
+              mamografía en segundos.
+            </p>
+            <a href="/" class="btn-primary">Comenzar análisis</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h2>Contigo IA</h2>
+            <p>Tecnología al servicio de la salud</p>
+          </div>
+
+          <div class="footer-links">
+            <div class="footer-column">
+              <h4>Recursos</h4>
+              <ul>
+                <li><a href="/about">Sobre el cáncer de mama</a></li>
+                <li><a href="#">Preguntas frecuentes</a></li>
+                <li><a href="#">Guía para especialistas</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-column">
+              <h4>Legal</h4>
+              <ul>
+                <li><a href="#">Términos de uso</a></li>
+                <li><a href="#">Política de privacidad</a></li>
+                <li><a href="#">Aviso legal</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-column">
+              <h4>Contacto</h4>
+              <ul>
+                <li>
+                  <a href="mailto:info@contigoia.org">info@contigoia.org</a>
+                </li>
+                <li><a href="tel:+123456789">+12 345 6789</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 Contigo IA - Todos los derechos reservados</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>
